@@ -1,46 +1,81 @@
 /* Reset básico */
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7fb;
+    background-color: #f4f7fa;
     color: #333;
-    padding: 0;
-    margin: 0;
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-header.header {
+/* Dark mode */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.header {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
-    padding: 20px;
+    padding: 20px 10px;
     background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid #e0e0e0;
     flex-wrap: wrap;
     text-align: center;
+    gap: 15px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark-mode .header {
+    background-color: #1e1e1e;
+    border-color: #333;
 }
 
 .logo-img {
     height: 60px;
     width: auto;
-    max-width: 100px;
 }
 
-header h1 {
-    font-size: 1.4em;
+.header h1 {
+    font-size: 1.3em;
     font-weight: 600;
-    color: #2a3f54;
+    color: #003366;
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .header h1 {
+    color: #8ab4f8;
+}
+
+.toggle-theme {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+body.dark-mode .toggle-theme {
+    background-color: #333;
+    color: #eee;
 }
 
 .main-container {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
     gap: 20px;
     padding: 20px;
@@ -48,19 +83,25 @@ header h1 {
 }
 
 .calendar-checkboxes {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
     width: 100%;
     max-width: 400px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 20px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark-mode .calendar-checkboxes {
+    background-color: #1f1f1f;
+    box-shadow: 0 2px 5px rgba(255,255,255,0.05);
 }
 
 .calendar-checkbox {
     display: block;
     margin: 10px 0;
     font-size: 1em;
-    color: #333;
 }
 
 .calendar-container {
@@ -75,38 +116,32 @@ iframe {
     max-height: 1000px;
     border: none;
     display: block;
-    border-radius: 10px;
 }
 
+/* Responsivo */
 @media (max-width: 768px) {
-    header.header {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .logo-img {
-        height: 50px;
-        margin-bottom: 10px;
-    }
-
-    header h1 {
-        font-size: 1.2em;
-        text-align: center;
-    }
-
     .main-container {
         flex-direction: column;
         align-items: center;
-        padding: 10px;
     }
 
     .calendar-checkboxes {
         width: 100%;
-        padding: 15px;
+        max-width: 90%;
     }
 
     iframe {
+        height: 80vh;
         min-height: 500px;
-        height: 75vh;
+    }
+
+    .header {
+        padding: 15px;
+        flex-direction: column;
+    }
+
+    .toggle-theme {
+        position: static;
+        margin-top: 10px;
     }
 }
