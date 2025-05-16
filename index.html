@@ -13,8 +13,8 @@
         <h1>TPL - Marari - Reserva de Carrinhos e Display</h1>
     </header>
 
-    <div class="main-container">
-        <div class="calendar-checkboxes">
+    <main class="main-container">
+        <section class="calendar-checkboxes">
             <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(1)"> Ponto1 - Padaria Jd. das Oliveiras</label>
             <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(2)"> Ponto2 - Ponto Ônibus 3151</label>
             <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(3)"> Ponto3 - Mercadinho P&B</label>
@@ -22,15 +22,15 @@
             <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(5)"> Ponto5 - OXXO Cupecê 1708</label>
             <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(6)"> Ponto6 - Padaria Primicia</label>
             <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(7)"> Ponto7 - Viaduto Wash. Luiz</label>
-        </div>
+        </section>
 
-        <div class="calendar-container">
-            <iframe id="calendarIframe" src=""></iframe>
-        </div>
-    </div>
+        <section class="calendar-container">
+            <iframe id="calendarIframe" src="" loading="lazy" title="Google Calendar"></iframe>
+        </section>
+    </main>
 
     <script>
-        var selectedCalendars = [];
+        const selectedCalendars = [];
 
         const calendarSrcMap = {
             1: "af1c95f4ae2831bba53c1cc769e785aefeb836b86a6af22aee8b1d2b73e6e190%40group.calendar.google.com",
