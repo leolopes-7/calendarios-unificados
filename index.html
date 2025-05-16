@@ -1,76 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Calendários Unificados</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 {
-            text-align: center;
-            padding: 15px 10px;
-            font-size: 1.4em;
-        }
-
-        .main-container {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: flex-start;
-            gap: 20px;
-            padding: 10px;
-            flex-wrap: wrap;
-        }
-
-        .calendar-checkboxes {
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .calendar-checkbox {
-            display: block;
-            margin: 10px 0;
-            padding: 5px;
-            font-size: 1em;
-        }
-
-        .calendar-container {
-            flex: 1 1 100%;
-            min-width: 300px;
-        }
-
-        iframe {
-            width: 100%;
-            min-height: 600px;
-            height: 80vh;
-            max-height: 1000px;
-            border: none;
-            display: block;
-        }
-
-        @media (max-width: 768px) {
-            .main-container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .calendar-checkboxes {
-                text-align: left;
-                padding: 0 10px;
-            }
-
-            iframe {
-                height: 80vh;
-                min-height: 500px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
@@ -132,9 +66,8 @@
             iframe.src = src;
         }
 
-        // Garante que o iframe inicial já venha com o calendário base
         window.addEventListener("load", function() {
-            selectedCalendars.push(calendarSrcMap[1]); // por padrão exibe o Ponto1
+            selectedCalendars.push(calendarSrcMap[1]); // exibe Ponto1 por padrão
             updateIframe();
         });
     </script>

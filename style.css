@@ -1,72 +1,65 @@
-/* Reset básico e fonte */
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  box-sizing: border-box;
-  background: #f0f4f8;
-  color: #333;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-/* Container geral centralizado e responsivo */
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
-  width: 95%;
+h1 {
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 1.4em;
 }
 
-/* Título */
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-weight: 600;
+.main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 10px;
+    flex-wrap: wrap;
 }
 
-/* Lista de pontos (checkboxes) */
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0 auto 40px auto;
-  max-width: 300px;
+.calendar-checkboxes {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
-ul li {
-  margin: 10px 0;
-  font-size: 1rem;
+.calendar-checkbox {
+    display: block;
+    margin: 10px 0;
+    padding: 5px;
+    font-size: 1em;
 }
 
-/* Calendário: forçando largura máxima e rolagem horizontal em telas pequenas */
-.calendar-wrapper {
-  width: 100%;
-  overflow-x: auto;
-  margin: auto;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background: white;
-  padding: 10px;
+.calendar-container {
+    flex: 1 1 100%;
+    min-width: 300px;
 }
 
-/* Fonte do calendário menor para melhor encaixe */
-.calendar-wrapper * {
-  font-size: 0.85rem;
+iframe {
+    width: 100%;
+    min-height: 600px;
+    height: 80vh;
+    max-height: 1000px;
+    border: none;
+    display: block;
 }
 
-/* Media queries para telas até 600px (celular) */
-@media (max-width: 600px) {
-  ul {
-    max-width: 100%;
-  }
-  
-  h2 {
-    font-size: 1.5rem;
-  }
-  
-  ul li {
-    font-size: 1.1rem;
-  }
-  
-  .calendar-wrapper * {
-    font-size: 0.9rem;
-  }
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .calendar-checkboxes {
+        text-align: left;
+        padding: 0 10px;
+    }
+
+    iframe {
+        height: 80vh;
+        min-height: 500px;
+    }
 }
