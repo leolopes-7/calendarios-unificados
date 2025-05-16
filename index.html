@@ -1,31 +1,30 @@
 <!DOCTYPE html>
-<html lang="pt-br" data-theme="light">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TPL - Marari - Reserva de Carrinhos e Display</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header class="header">
-        <img src="logo.svg" alt="Logo TPL" class="logo-img" />
+        <img src="logo.svg" alt="Logo TPL" class="logo-img">
         <h1>TPL - Marari - Reserva de Carrinhos e Display</h1>
-        <label class="theme-switch">
-            <input type="checkbox" id="darkModeToggle" />
-            <span class="slider"></span>
-        </label>
+        <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+            🌞
+        </button>
     </header>
 
     <div class="main-container">
         <div class="calendar-checkboxes">
-            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(1)" /> Ponto1 - Padaria Jd. das Oliveiras</label>
-            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(2)" /> Ponto2 - Ponto Ônibus 3151</label>
-            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(3)" /> Ponto3 - Mercadinho P&B</label>
-            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(4)" /> Ponto4 - Padaria Casa Palma</label>
-            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(5)" /> Ponto5 - OXXO Cupecê 1708</label>
-            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(6)" /> Ponto6 - Padaria Primicia</label>
-            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(7)" /> Ponto7 - Viaduto Wash. Luiz</label>
+            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(1)"> Ponto 1 - Padaria Jd. das Oliveiras</label>
+            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(2)"> Ponto 2 - Ponto Ônibus 3151</label>
+            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(3)"> Ponto 3 - Mercadinho P&B</label>
+            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(4)"> Ponto 4 - Padaria Casa Palma</label>
+            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(5)"> Ponto 5 - OXXO Cupecê 1708</label>
+            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(6)"> Ponto 6 - Padaria Primicia</label>
+            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(7)"> Ponto 7 - Viaduto Wash. Luiz</label>
         </div>
 
         <div class="calendar-container">
@@ -34,6 +33,29 @@
     </div>
 
     <script>
+        const themeToggle = document.getElementById("themeToggle");
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        function setTheme(dark) {
+            document.body.classList.toggle("dark-mode", dark);
+            themeToggle.textContent = dark ? "🌙" : "🌞";
+        }
+
+        themeToggle.addEventListener("click", () => {
+            const isDark = document.body.classList.toggle("dark-mode");
+            localStorage.setItem("theme", isDark ? "dark" : "light");
+            themeToggle.textContent = isDark ? "🌙" : "🌞";
+        });
+
+        // Auto carregamento e preferência
+        window.addEventListener("load", function () {
+            const savedTheme = localStorage.getItem("theme");
+            setTheme(savedTheme === "dark" || (!savedTheme && prefersDark));
+
+            selectedCalendars.push(calendarSrcMap[1]);
+            updateIframe();
+        });
+
         var selectedCalendars = [];
 
         const calendarSrcMap = {
@@ -67,29 +89,12 @@
             src += "ctz=America%2FSao_Paulo";
             src += isMobile ? "&mode=AGENDA" : "&mode=WEEK";
 
-            selectedCalendars.forEach(function(calendar) {
+            selectedCalendars.forEach(function (calendar) {
                 src += "&src=" + calendar;
             });
 
             iframe.src = src;
         }
-
-        window.addEventListener("load", function () {
-            selectedCalendars.push(calendarSrcMap[1]);
-            updateIframe();
-
-            const toggle = document.getElementById("darkModeToggle");
-            const root = document.documentElement;
-            toggle.checked = localStorage.getItem("theme") === "dark";
-
-            root.setAttribute("data-theme", toggle.checked ? "dark" : "light");
-
-            toggle.addEventListener("change", () => {
-                const isDark = toggle.checked;
-                root.setAttribute("data-theme", isDark ? "dark" : "light");
-                localStorage.setItem("theme", isDark ? "dark" : "light");
-            });
-        });
     </script>
 
 </body>
