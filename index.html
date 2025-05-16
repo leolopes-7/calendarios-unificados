@@ -1,96 +1,81 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TPL Marari - Reserva de Carrinhos e Display</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TPL Marari - Reserva de Carrinhos e Display</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header class="header">
+    <img src="logo.svg" alt="Logo TPL" class="logo-img" />
+    <h1>TPL Marari - Reserva de Carrinhos e Display</h1>
+    <button id="themeToggle" class="theme-toggle">
+      <span id="themeIcon">🌙</span>
+      <span id="themeText">modo escuro</span>
+    </button>
+  </header>
 
-    <header class="header">
-        <img src="logo.svg" alt="Logo TPL" class="logo-img">
-        <h1>TPL Marari - Reserva de Carrinhos e Display</h1>
-        <button class="dark-mode-toggle" onclick="toggleDarkMode()">
-            <span class="icon" id="mode-icon">🌙</span>
-            <span id="mode-text">modo escuro</span>
-        </button>
-    </header>
-
-    <div class="main-container">
-        <div class="calendar-checkboxes">
-            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(1)"> <span>Ponto1</span><strong> - Padaria Jd. das Oliveiras</strong></label>
-            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(2)"> <span>Ponto2</span><strong> - Mercado P&B | Ponto 5131</strong></label>
-            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(3)"> <span>Ponto3</span><strong> - Mercadinho P&B</strong></label>
-            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(4)"> <span>Ponto4</span><strong> - Padaria Casa Palma</strong></label>
-            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(5)"> <span>Ponto5</span><strong> - OXXO Cupecê 1708</strong></label>
-            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(6)"> <span>Ponto6</span><strong> - Padaria Primicia</strong></label>
-            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(7)"> <span>Ponto7</span><strong> - Viaduto Wash. Luiz</strong></label>
-        </div>
-
-        <div class="calendar-container">
-            <iframe id="calendarIframe" src=""></iframe>
-        </div>
+  <div class="main-container">
+    <div class="calendar-checkboxes">
+      <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(1)"> <span><strong>Ponto 1</strong> - Padaria Jd das Oliveiras</span></label>
+      <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(2)"> <span><strong>Ponto 2</strong> - Mercado P&B | Ponto 5131</span></label>
+      <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(3)"> <span><strong>Ponto 3</strong> - Praça Casa Palma</span></label>
+      <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(4)"> <span><strong>Ponto 4</strong> - Padaria Primicia</span></label>
+      <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(5)"> <span><strong>Ponto 5</strong> - Viaduto Washington Luiz</span></label>
     </div>
 
-    <script>
-        var selectedCalendars = [];
+    <div class="calendar-container">
+      <iframe id="calendarIframe" src=""></iframe>
+    </div>
+  </div>
 
-        const calendarSrcMap = {
-            1: "af1c95f4ae2831bba53c1cc769e785aefeb836b86a6af22aee8b1d2b73e6e190%40group.calendar.google.com",
-            2: "e34e0be9c80ce654dc03c852e6e3c52af2f53d129295e297861523cbbeff93c2%40group.calendar.google.com",
-            3: "d6c38e409070037546660123a107f4b95f65681a96c216cac7903d58465f5530%40group.calendar.google.com",
-            4: "e22e471e522d36c6e1bca2edfcecfbc5ea23c9af8b5b4d10004bf2c7e4b2261f%40group.calendar.google.com",
-            5: "1aa2749c04ae9ac703fa3b2ebbee2db79105711fcda01f98b82da998bc7488ce%40group.calendar.google.com",
-            6: "1598a3b0e12cfb9981e7b13135ef8a0cb2255093750360f15803b36e02fb8d60%40group.calendar.google.com",
-            7: "69728aec22cef2d4f5994b11f9412a46882ea0f32700fbbe20083f514152b665%40group.calendar.google.com"
-        };
+  <script>
+    const selectedCalendars = [];
 
-        function toggleCalendar(calendarId) {
-            const calendarSrc = calendarSrcMap[calendarId];
-            const index = selectedCalendars.indexOf(calendarSrc);
+    const calendarSrcMap = {
+      1: "af1c95f4ae2831bba53c1cc769e785aefeb836b86a6af22aee8b1d2b73e6e190%40group.calendar.google.com",
+      2: "e34e0be9c80ce654dc03c852e6e3c52af2f53d129295e297861523cbbeff93c2%40group.calendar.google.com",
+      3: "e22e471e522d36c6e1bca2edfcecfbc5ea23c9af8b5b4d10004bf2c7e4b2261f%40group.calendar.google.com",
+      4: "1598a3b0e12cfb9981e7b13135ef8a0cb2255093750360f15803b36e02fb8d60%40group.calendar.google.com",
+      5: "69728aec22cef2d4f5994b11f9412a46882ea0f32700fbbe20083f514152b665%40group.calendar.google.com"
+    };
 
-            if (index === -1) {
-                selectedCalendars.push(calendarSrc);
-            } else {
-                selectedCalendars.splice(index, 1);
-            }
+    function toggleCalendar(calendarId) {
+      const calendarSrc = calendarSrcMap[calendarId];
+      const index = selectedCalendars.indexOf(calendarSrc);
+      if (index === -1) {
+        selectedCalendars.push(calendarSrc);
+      } else {
+        selectedCalendars.splice(index, 1);
+      }
+      updateIframe();
+    }
 
-            updateIframe();
-        }
+    function updateIframe() {
+      const iframe = document.getElementById('calendarIframe');
+      const isMobile = window.innerWidth < 768;
+      let src = "https://calendar.google.com/calendar/embed?ctz=America%2FSao_Paulo";
+      src += isMobile ? "&mode=AGENDA" : "&mode=WEEK";
+      selectedCalendars.forEach(cal => src += "&src=" + cal);
+      iframe.src = src;
+    }
 
-        function updateIframe() {
-            const iframe = document.getElementById('calendarIframe');
-            const isMobile = window.innerWidth < 768;
+    window.addEventListener("load", () => {
+      selectedCalendars.push(calendarSrcMap[1]);
+      updateIframe();
+    });
 
-            let src = "https://calendar.google.com/calendar/embed?";
-            src += "ctz=America%2FSao_Paulo";
-            src += isMobile ? "&mode=AGENDA" : "&mode=WEEK";
+    const toggleBtn = document.getElementById('themeToggle');
+    const icon = document.getElementById('themeIcon');
+    const text = document.getElementById('themeText');
 
-            selectedCalendars.forEach(function(calendar) {
-                src += "&src=" + calendar;
-            });
-
-            iframe.src = src;
-        }
-
-        function toggleDarkMode() {
-            const body = document.body;
-            const icon = document.getElementById("mode-icon");
-            const text = document.getElementById("mode-text");
-
-            body.classList.toggle("dark-mode");
-
-            const isDark = body.classList.contains("dark-mode");
-            icon.textContent = isDark ? "☀️" : "🌙";
-            text.textContent = isDark ? "modo claro" : "modo escuro";
-        }
-
-        window.addEventListener("load", function() {
-            selectedCalendars.push(calendarSrcMap[1]);
-            updateIframe();
-        });
-    </script>
-
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      const isDark = document.body.classList.contains('dark');
+      icon.textContent = isDark ? '☀️' : '🌙';
+      text.textContent = isDark ? 'modo claro' : 'modo escuro';
+    });
+  </script>
 </body>
 </html>
