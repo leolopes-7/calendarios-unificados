@@ -1,135 +1,122 @@
 :root {
-  --bg-color: #f9f9fb;
-  --text-color: #222;
-  --header-bg: #ffffff;
-  --primary: #1e90ff;
-  --card-bg: #ffffff;
-  --checkbox-bg: #f1f1f1;
-  --border-color: #ddd;
-}
-
-body.dark-mode {
-  --bg-color: #121212;
-  --text-color: #f1f1f1;
-  --header-bg: #1e1e1e;
-  --card-bg: #1f1f1f;
-  --checkbox-bg: #2a2a2a;
-  --border-color: #333;
+    --primary-color: #1e3a8a;
+    --secondary-color: #f3f4f6;
+    --text-color: #1f2937;
+    --background-color: #ffffff;
+    --checkbox-bg: #ffffff;
+    --checkbox-border: #d1d5db;
+    --checkbox-checked: #3b82f6;
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .header {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 1rem 2rem;
-  background-color: var(--header-bg);
-  border-bottom: 1px solid var(--border-color);
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.header h1 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin: 0;
-  flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--secondary-color);
+    padding: 1rem 2rem;
+    border-bottom: 2px solid var(--primary-color);
+    flex-wrap: wrap;
 }
 
 .logo-img {
-  height: 48px;
-  width: auto;
+    width: 50px;
+    height: auto;
+    margin-right: 1rem;
 }
 
-#theme-toggle {
-  background-color: transparent;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 0.4rem 0.8rem;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  gap: 8px;
-  transition: all 0.3s ease;
+.header h1 {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    flex-grow: 1;
 }
 
-#theme-toggle:hover {
-  background-color: var(--checkbox-bg);
+.dark-mode-toggle {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+    background-color: #2744aa;
 }
 
 .main-container {
-  padding: 2rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: auto;
 }
 
 .calendar-checkboxes {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  background: var(--card-bg);
-  padding: 1.2rem;
-  border-radius: 12px;
-  max-width: 450px;
-  margin: 0 auto 2rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    background: var(--secondary-color);
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 }
 
 .calendar-checkbox {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--checkbox-bg);
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
-  transition: background 0.3s ease;
-  cursor: pointer;
-}
-
-.calendar-checkbox input[type="checkbox"] {
-  transform: scale(1.2);
-  cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.4rem;
+    border-left: 4px solid transparent;
+    transition: border 0.2s ease;
 }
 
 .calendar-checkbox:hover {
-  background: var(--primary);
-  color: #fff;
+    border-left: 4px solid var(--primary-color);
+    background-color: rgba(30, 58, 138, 0.05);
+}
+
+.calendar-checkbox input[type="checkbox"] {
+    accent-color: var(--primary-color);
+    width: 18px;
+    height: 18px;
 }
 
 .calendar-checkbox span {
-  font-weight: bold;
-  width: 80px;
-  display: inline-block;
+    font-weight: bold;
+    color: var(--primary-color);
 }
 
 .calendar-checkbox strong {
-  font-weight: 500;
+    color: var(--text-color);
 }
 
 .calendar-container iframe {
-  width: 100%;
-  height: 600px;
-  border: none;
-  border-radius: 10px;
-  background: var(--card-bg);
+    width: 100%;
+    height: 600px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
 }
 
-@media (max-width: 768px) {
-  .calendar-container iframe {
-    height: 500px;
-  }
-
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  #theme-toggle {
-    align-self: flex-end;
-  }
-}
+/* Dark Mode Styles */
+body.dark-mode {
+    --primary-color: #60a5fa;
+    --secondary-color: #1f2937;
+    --text-color: #f9fafb;
+    --background-color: #111
