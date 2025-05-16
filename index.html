@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TPL - Marari - Reserva de Carrinhos e Display</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>TPL - Marari - Reserva de Carrinhos e Display</h1>
+    <header class="header">
+        <img src="logo.svg" alt="Logo TPL" class="logo-img">
+        <h1>TPL - Marari - Reserva de Carrinhos e Display</h1>
+    </header>
+
     <div class="main-container">
         <div class="calendar-checkboxes">
             <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(1)"> Ponto1 - Padaria Jd. das Oliveiras</label>
@@ -68,7 +71,7 @@
         }
 
         window.addEventListener("load", function() {
-            selectedCalendars.push(calendarSrcMap[1]); // Exibe o Ponto1 por padrão
+            selectedCalendars.push(calendarSrcMap[1]);
             updateIframe();
         });
     </script>

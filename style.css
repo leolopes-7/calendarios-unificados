@@ -1,121 +1,89 @@
-/* style.css */
-
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background: #f5f7fa;
+    background-color: #f7f9fc;
     color: #333;
 }
 
-h1 {
-    text-align: center;
-    padding: 30px 20px;
-    font-weight: 600;
-    font-size: 2rem;
-    color: #2c3e50;
-    border-bottom: 3px solid #2980b9;
-    margin-bottom: 40px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-.main-container {
-    max-width: 1000px;
-    margin: 0 auto 50px auto;
-    padding: 0 20px;
+/* Header com logo e título */
+.header {
     display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
+    align-items: center;
     justify-content: center;
+    gap: 12px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+    flex-wrap: wrap;
 }
 
+.logo-img {
+    height: 50px;
+    width: auto;
+}
+
+/* Título */
+h1 {
+    font-size: 1.4em;
+    margin: 0;
+    text-align: center;
+}
+
+/* Layout principal */
+.main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+/* Checkbox */
 .calendar-checkboxes {
-    flex: 1 1 280px;
-    background: #ffffff;
-    padding: 25px 20px;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-    max-height: 500px;
-    overflow-y: auto;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 .calendar-checkbox {
-    display: flex;
-    align-items: center;
-    margin-bottom: 18px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    color: #34495e;
-    user-select: none;
-    transition: color 0.3s ease;
+    display: block;
+    margin: 10px 0;
+    padding: 5px;
+    font-size: 1em;
 }
 
-.calendar-checkbox input[type="checkbox"] {
-    appearance: none;
-    width: 22px;
-    height: 22px;
-    margin-right: 12px;
-    border: 2px solid #2980b9;
-    border-radius: 6px;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-    cursor: pointer;
-    position: relative;
-}
-
-.calendar-checkbox input[type="checkbox"]:checked {
-    background-color: #2980b9;
-    border-color: #2980b9;
-}
-
-.calendar-checkbox input[type="checkbox"]:checked::after {
-    content: '✔';
-    color: white;
-    font-weight: 700;
-    position: absolute;
-    top: 1px;
-    left: 5px;
-    font-size: 16px;
-}
-
-.calendar-checkbox:hover {
-    color: #2980b9;
-}
-
+/* Calendário */
 .calendar-container {
-    flex: 2 1 600px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-    overflow: hidden;
+    flex: 1 1 100%;
+    min-width: 300px;
 }
 
 iframe {
     width: 100%;
+    min-height: 600px;
     height: 80vh;
+    max-height: 1000px;
     border: none;
     display: block;
-    border-radius: 12px;
-    transition: box-shadow 0.3s ease;
 }
 
-iframe:hover {
-    box-shadow: 0 0 30px rgba(41, 128, 185, 0.5);
-}
-
+/* Responsivo */
 @media (max-width: 768px) {
     .main-container {
         flex-direction: column;
-        padding-bottom: 40px;
+        align-items: center;
     }
 
     .calendar-checkboxes {
-        max-height: none;
-        margin-bottom: 30px;
+        text-align: left;
+        padding: 0 10px;
     }
 
-    h1 {
-        font-size: 1.7rem;
-        padding-bottom: 20px;
-        border-bottom-width: 2px;
+    iframe {
+        height: 80vh;
+        min-height: 500px;
     }
 }
