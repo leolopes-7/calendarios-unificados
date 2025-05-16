@@ -61,11 +61,6 @@
       iframe.src = src;
     }
 
-    window.addEventListener("load", () => {
-      selectedCalendars.push(calendarSrcMap[1]);
-      updateIframe();
-    });
-
     const toggleBtn = document.getElementById('themeToggle');
     const icon = document.getElementById('themeIcon');
     const text = document.getElementById('themeText');
