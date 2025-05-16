@@ -47,7 +47,7 @@
         </div>
 
         <div class="calendar-container">
-            <iframe id="calendarIframe" src=""></iframe>
+            <iframe id="calendarIframe" style="display:none;" src=""></iframe>
         </div>
     </div>
 
@@ -64,6 +64,12 @@
 
         function updateIframe() {
             const iframe = document.getElementById("calendarIframe");
+            if (selectedCalendars.length === 0) {
+                iframe.style.display = "none";
+                iframe.src = "";
+                return;
+            }
+
             const isMobile = window.innerWidth < 768;
             let src = "https://calendar.google.com/calendar/embed?";
             src += "ctz=America%2FSao_Paulo";
@@ -74,6 +80,7 @@
             });
 
             iframe.src = src;
+            iframe.style.display = "block";
         }
 
         function toggleCalendar(calendarId) {
@@ -91,7 +98,6 @@
         }
 
         window.addEventListener("load", () => {
-            // Marcar os checkboxes salvos
             Object.keys(calendarSrcMap).forEach(id => {
                 const input = document.querySelector(`input[value="${id}"]`);
                 if (selectedCalendars.includes(calendarSrcMap[id])) {
@@ -101,7 +107,6 @@
             updateIframe();
         });
 
-        // Dark mode toggle
         const toggleButton = document.getElementById("darkModeToggle");
         const darkMode = localStorage.getItem("darkMode") === "true";
 
