@@ -1,147 +1,144 @@
-/* Reset básico */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+:root {
+    --bg-color: #f0f2f5;
+    --text-color: #333;
+    --header-bg: #ffffff;
+    --checkbox-bg: #ffffff;
+    --card-bg: #ffffff;
+    --border-color: #ccc;
+    --primary-color: #0066cc;
+}
+
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --header-bg: #1f1f1f;
+    --checkbox-bg: #2c2c2c;
+    --card-bg: #1f1f1f;
+    --border-color: #444;
+    --primary-color: #4da3ff;
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7fa;
-    color: #333;
-    line-height: 1.6;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Dark mode */
-body.dark-mode {
-    background-color: #121212;
-    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .header {
+    background-color: var(--header-bg);
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 20px 10px;
-    background-color: #fff;
-    border-bottom: 2px solid #e0e0e0;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     flex-wrap: wrap;
-    text-align: center;
-    gap: 15px;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-body.dark-mode .header {
-    background-color: #1e1e1e;
-    border-color: #333;
+    gap: 10px;
 }
 
 .logo-img {
-    height: 60px;
+    height: 50px;
     width: auto;
 }
 
 .header h1 {
-    font-size: 1.3em;
-    font-weight: 600;
-    color: #003366;
-    transition: color 0.3s ease;
+    font-size: 1.1rem;
+    flex: 1;
+    text-align: center;
+    margin: 0;
 }
 
-body.dark-mode .header h1 {
-    color: #8ab4f8;
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 48px;
+    height: 24px;
 }
 
-.toggle-theme {
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: #007bff;
-    border: none;
-    color: white;
-    padding: 6px 12px;
-    font-size: 14px;
-    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: background-color 0.3s;
+    border-radius: 24px;
 }
 
-body.dark-mode .toggle-theme {
-    background-color: #333;
-    color: #eee;
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: transform 0.3s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--primary-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(24px);
 }
 
 .main-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 20px;
     padding: 20px;
-    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .calendar-checkboxes {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    background-color: #ffffff;
+    background-color: var(--card-bg);
+    padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    padding: 20px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-body.dark-mode .calendar-checkboxes {
-    background-color: #1f1f1f;
-    box-shadow: 0 2px 5px rgba(255,255,255,0.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+    max-width: 500px;
+    width: 100%;
+    transition: background-color 0.3s;
 }
 
 .calendar-checkbox {
     display: block;
-    margin: 10px 0;
-    font-size: 1em;
+    margin-bottom: 10px;
 }
 
-.calendar-container {
-    flex: 1 1 100%;
-    min-width: 300px;
+.calendar-checkbox input {
+    margin-right: 10px;
 }
 
-iframe {
+.calendar-container iframe {
     width: 100%;
-    min-height: 600px;
-    height: 80vh;
-    max-height: 1000px;
+    height: 600px;
     border: none;
-    display: block;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }
 
-/* Responsivo */
 @media (max-width: 768px) {
-    .main-container {
-        flex-direction: column;
-        align-items: center;
+    .header h1 {
+        font-size: 0.9rem;
+        text-align: center;
+    }
+
+    .calendar-container iframe {
+        height: 500px;
     }
 
     .calendar-checkboxes {
-        width: 100%;
-        max-width: 90%;
-    }
-
-    iframe {
-        height: 80vh;
-        min-height: 500px;
-    }
-
-    .header {
-        padding: 15px;
-        flex-direction: column;
-    }
-
-    .toggle-theme {
-        position: static;
-        margin-top: 10px;
+        padding: 10px;
     }
 }

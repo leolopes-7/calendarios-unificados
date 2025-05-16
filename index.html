@@ -1,28 +1,31 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" data-theme="light">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TPL - Marari - Reserva de Carrinhos e Display</title>
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
     <header class="header">
-        <img src="logo.svg" alt="Logo TPL" class="logo-img">
+        <img src="logo.svg" alt="Logo TPL" class="logo-img" />
         <h1>TPL - Marari - Reserva de Carrinhos e Display</h1>
-        <button class="toggle-theme" onclick="toggleTheme()">🌙 Alternar Tema</button>
+        <label class="theme-switch">
+            <input type="checkbox" id="darkModeToggle" />
+            <span class="slider"></span>
+        </label>
     </header>
 
     <div class="main-container">
         <div class="calendar-checkboxes">
-            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(1)"> Ponto1 - Padaria Jd. das Oliveiras</label>
-            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(2)"> Ponto2 - Ponto Ônibus 3151</label>
-            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(3)"> Ponto3 - Mercadinho P&B</label>
-            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(4)"> Ponto4 - Padaria Casa Palma</label>
-            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(5)"> Ponto5 - OXXO Cupecê 1708</label>
-            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(6)"> Ponto6 - Padaria Primicia</label>
-            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(7)"> Ponto7 - Viaduto Wash. Luiz</label>
+            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(1)" /> Ponto1 - Padaria Jd. das Oliveiras</label>
+            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(2)" /> Ponto2 - Ponto Ônibus 3151</label>
+            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(3)" /> Ponto3 - Mercadinho P&B</label>
+            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(4)" /> Ponto4 - Padaria Casa Palma</label>
+            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(5)" /> Ponto5 - OXXO Cupecê 1708</label>
+            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(6)" /> Ponto6 - Padaria Primicia</label>
+            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(7)" /> Ponto7 - Viaduto Wash. Luiz</label>
         </div>
 
         <div class="calendar-container">
@@ -71,20 +74,21 @@
             iframe.src = src;
         }
 
-        function toggleTheme() {
-            document.body.classList.toggle("dark-mode");
-            localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
-        }
-
-        // Detectar preferência do usuário
         window.addEventListener("load", function () {
             selectedCalendars.push(calendarSrcMap[1]);
             updateIframe();
 
-            const savedTheme = localStorage.getItem("theme");
-            if (savedTheme === "dark" || (savedTheme === null && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.body.classList.add("dark-mode");
-            }
+            const toggle = document.getElementById("darkModeToggle");
+            const root = document.documentElement;
+            toggle.checked = localStorage.getItem("theme") === "dark";
+
+            root.setAttribute("data-theme", toggle.checked ? "dark" : "light");
+
+            toggle.addEventListener("change", () => {
+                const isDark = toggle.checked;
+                root.setAttribute("data-theme", isDark ? "dark" : "light");
+                localStorage.setItem("theme", isDark ? "dark" : "light");
+            });
         });
     </script>
 
