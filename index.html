@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendários Unificados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 15px 10px;
+            font-size: 1.4em;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 10px;
+            flex-wrap: wrap;
+        }
+
+        .calendar-checkboxes {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .calendar-checkbox {
+            display: block;
+            margin: 10px 0;
+            padding: 5px;
+            font-size: 1em;
+        }
+
+        .calendar-container {
+            flex: 1 1 100%;
+            min-width: 300px;
+        }
+
+        iframe {
+            width: 100%;
+            min-height: 600px;
+            height: 80vh;
+            max-height: 1000px;
+            border: none;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .calendar-checkboxes {
+                text-align: left;
+                padding: 0 10px;
+            }
+
+            iframe {
+                height: 80vh;
+                min-height: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Calendários Unificados</h1>
+    <div class="main-container">
+        <div class="calendar-checkboxes">
+            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(1)"> Ponto1 - Padaria Jd. das Oliveiras</label>
+            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(2)"> Ponto2 - Ponto Ônibus 3151</label>
+            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(3)"> Ponto3 - Mercadinho P&B</label>
+            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(4)"> Ponto4 - Padaria Casa Palma</label>
+            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(5)"> Ponto5 - OXXO Cupecê 1708</label>
+            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(6)"> Ponto6 - Padaria Primicia</label>
+            <label class="calendar-checkbox"><input type="checkbox" onclick="toggleCalendar(7)"> Ponto7 - Viaduto Wash. Luiz</label>
+        </div>
+
+        <div class="calendar-container">
+            <iframe id="calendarIframe" src=""></iframe>
+        </div>
+    </div>
+
+    <script>
+        var selectedCalendars = [];
+
+        const calendarSrcMap = {
+            1: "af1c95f4ae2831bba53c1cc769e785aefeb836b86a6af22aee8b1d2b73e6e190%40group.calendar.google.com",
+            2: "e34e0be9c80ce654dc03c852e6e3c52af2f53d129295e297861523cbbeff93c2%40group.calendar.google.com",
+            3: "d6c38e409070037546660123a107f4b95f65681a96c216cac7903d58465f5530%40group.calendar.google.com",
+            4: "e22e471e522d36c6e1bca2edfcecfbc5ea23c9af8b5b4d10004bf2c7e4b2261f%40group.calendar.google.com",
+            5: "1aa2749c04ae9ac703fa3b2ebbee2db79105711fcda01f98b82da998bc7488ce%40group.calendar.google.com",
+            6: "1598a3b0e12cfb9981e7b13135ef8a0cb2255093750360f15803b36e02fb8d60%40group.calendar.google.com",
+            7: "69728aec22cef2d4f5994b11f9412a46882ea0f32700fbbe20083f514152b665%40group.calendar.google.com"
+        };
+
+        function toggleCalendar(calendarId) {
+            const calendarSrc = calendarSrcMap[calendarId];
+            const index = selectedCalendars.indexOf(calendarSrc);
+
+            if (index === -1) {
+                selectedCalendars.push(calendarSrc);
+            } else {
+                selectedCalendars.splice(index, 1);
+            }
+
+            updateIframe();
+        }
+
+        function updateIframe() {
+            const iframe = document.getElementById('calendarIframe');
+            const isMobile = window.innerWidth < 768;
+
+            let src = "https://calendar.google.com/calendar/embed?";
+            src += "ctz=America%2FSao_Paulo";
+            src += isMobile ? "&mode=AGENDA" : "&mode=WEEK";
+
+            selectedCalendars.forEach(function(calendar) {
+                src += "&src=" + calendar;
+            });
+
+            iframe.src = src;
+        }
+
+        // Garante que o iframe inicial já venha com o calendário base
+        window.addEventListener("load", function() {
+            selectedCalendars.push(calendarSrcMap[1]); // por padrão exibe o Ponto1
+            updateIframe();
+        });
+    </script>
+
+</body>
+</html>
