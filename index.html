@@ -26,7 +26,7 @@
     </div>
 
     <div class="calendar-container">
-      <iframe id="calendarIframe" src=""></iframe>
+      <iframe id="calendarIframe" src="" style="display: none;"></iframe>
     </div>
   </div>
 
@@ -54,11 +54,17 @@
 
     function updateIframe() {
       const iframe = document.getElementById('calendarIframe');
+      if (selectedCalendars.length === 0) {
+        iframe.style.display = "none";
+        return;
+      }
+
       const isMobile = window.innerWidth < 768;
       let src = "https://calendar.google.com/calendar/embed?ctz=America%2FSao_Paulo";
       src += isMobile ? "&mode=AGENDA" : "&mode=WEEK";
       selectedCalendars.forEach(cal => src += "&src=" + cal);
       iframe.src = src;
+      iframe.style.display = "block";
     }
 
     const toggleBtn = document.getElementById('themeToggle');
