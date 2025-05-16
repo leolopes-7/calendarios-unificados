@@ -71,12 +71,28 @@
     const icon = document.getElementById('themeIcon');
     const text = document.getElementById('themeText');
 
+    function applyThemeFromStorage() {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        document.body.classList.add("dark");
+        icon.textContent = "☀️";
+        text.textContent = "modo claro";
+      } else {
+        document.body.classList.remove("dark");
+        icon.textContent = "🌙";
+        text.textContent = "modo escuro";
+      }
+    }
+
     toggleBtn.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-      const isDark = document.body.classList.contains('dark');
-      icon.textContent = isDark ? '☀️' : '🌙';
-      text.textContent = isDark ? 'modo claro' : 'modo escuro';
+      const isDark = document.body.classList.toggle('dark');
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+      icon.textContent = isDark ? "☀️" : "🌙";
+      text.textContent = isDark ? "modo claro" : "modo escuro";
     });
+
+    // Aplicar tema salvo ao carregar
+    window.addEventListener("DOMContentLoaded", applyThemeFromStorage);
   </script>
 </body>
 </html>
