@@ -64,9 +64,10 @@
 
         function updateIframe() {
             const iframe = document.getElementById("calendarIframe");
+            const isMobile = window.innerWidth < 768;
             let src = "https://calendar.google.com/calendar/embed?";
             src += "ctz=America%2FSao_Paulo";
-            src += "&mode=AGENDA"; // Força a view "Agenda"
+            src += "&mode=AGENDA"; // Força o modo lista por padrão
 
             selectedCalendars.forEach(calendar => {
                 src += "&src=" + calendar;
@@ -79,10 +80,10 @@
             const src = calendarSrcMap[calendarId];
             const index = selectedCalendars.indexOf(src);
 
+            // Permitir apenas um selecionado por vez
+            selectedCalendars.length = 0;
             if (index === -1) {
                 selectedCalendars.push(src);
-            } else {
-                selectedCalendars.splice(index, 1);
             }
 
             localStorage.setItem("selectedCalendars", JSON.stringify(selectedCalendars));
@@ -95,6 +96,8 @@
                 const input = document.querySelector(`input[value="${id}"]`);
                 if (selectedCalendars.includes(calendarSrcMap[id])) {
                     input.checked = true;
+                } else {
+                    input.checked = false;
                 }
             });
             updateIframe();
@@ -117,6 +120,18 @@
         });
 
         applyDarkMode(darkMode);
+
+        // Permitir apenas um checkbox marcado por vez
+        const checkboxes = document.querySelectorAll('.calendar-checkbox input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                if (this.checked) {
+                    checkboxes.forEach(cb => {
+                        if (cb !== this) cb.checked = false;
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
