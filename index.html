@@ -20,27 +20,27 @@
     <div class="main-container">
         <div class="calendar-checkboxes">
             <label class="calendar-checkbox">
-                <input type="checkbox" value="1" onclick="toggleCalendar(1)">
+                <input type="radio" name="calendar" value="1" onclick="toggleCalendar(1)">
                 <span class="checkmark"></span>
                 <strong>Ponto 1</strong> - Padaria Jd das Oliveiras
             </label>
             <label class="calendar-checkbox">
-                <input type="checkbox" value="2" onclick="toggleCalendar(2)">
+                <input type="radio" name="calendar" value="2" onclick="toggleCalendar(2)">
                 <span class="checkmark"></span>
                 <strong>Ponto 2</strong> - Mercado P&B | Ponto 5131
             </label>
             <label class="calendar-checkbox">
-                <input type="checkbox" value="3" onclick="toggleCalendar(3)">
+                <input type="radio" name="calendar" value="3" onclick="toggleCalendar(3)">
                 <span class="checkmark"></span>
                 <strong>Ponto 3</strong> - Praça Casa Palma
             </label>
             <label class="calendar-checkbox">
-                <input type="checkbox" value="4" onclick="toggleCalendar(4)">
+                <input type="radio" name="calendar" value="4" onclick="toggleCalendar(4)">
                 <span class="checkmark"></span>
                 <strong>Ponto 4</strong> - Padaria Primicia
             </label>
             <label class="calendar-checkbox">
-                <input type="checkbox" value="5" onclick="toggleCalendar(5)">
+                <input type="radio" name="calendar" value="5" onclick="toggleCalendar(5)">
                 <span class="checkmark"></span>
                 <strong>Ponto 5</strong> - Viaduto Washington Luiz
             </label>
@@ -58,16 +58,15 @@
             1: "af1c95f4ae2831bba53c1cc769e785aefeb836b86a6af22aee8b1d2b73e6e190%40group.calendar.google.com",
             2: "e34e0be9c80ce654dc03c852e6e3c52af2f53d129295e297861523cbbeff93c2%40group.calendar.google.com",
             3: "d6c38e409070037546660123a107f4b95f65681a96c216cac7903d58465f5530%40group.calendar.google.com",
-            4: "1598a3b0e12cfb9981e7b13135ef8a0cb2255093750360f15803b36e02fb8d60%40group.calendar.google.com",
-            5: "69728aec22cef2d4f5994b11f9412a46882ea0f32700fbbe20083f514152b665%40group.calendar.google.com"
+            4: "e22e471e522d36c6e1bca2edfcecfbc5ea23c9af8b5b4d10004bf2c7e4b2261f%40group.calendar.google.com",
+            5: "1aa2749c04ae9ac703fa3b2ebbee2db79105711fcda01f98b82da998bc7488ce%40group.calendar.google.com"
         };
 
         function updateIframe() {
             const iframe = document.getElementById("calendarIframe");
-            const isMobile = window.innerWidth < 768;
             let src = "https://calendar.google.com/calendar/embed?";
             src += "ctz=America%2FSao_Paulo";
-            src += "&mode=AGENDA"; // Força o modo lista por padrão
+            src += "&mode=AGENDA"; // Visualização em lista
 
             selectedCalendars.forEach(calendar => {
                 src += "&src=" + calendar;
@@ -78,26 +77,18 @@
 
         function toggleCalendar(calendarId) {
             const src = calendarSrcMap[calendarId];
-            const index = selectedCalendars.indexOf(src);
-
-            // Permitir apenas um selecionado por vez
             selectedCalendars.length = 0;
-            if (index === -1) {
-                selectedCalendars.push(src);
-            }
-
+            selectedCalendars.push(src);
             localStorage.setItem("selectedCalendars", JSON.stringify(selectedCalendars));
             updateIframe();
         }
 
         window.addEventListener("load", () => {
-            // Marcar os checkboxes salvos
+            // Marcar o radio salvo
             Object.keys(calendarSrcMap).forEach(id => {
                 const input = document.querySelector(`input[value="${id}"]`);
                 if (selectedCalendars.includes(calendarSrcMap[id])) {
                     input.checked = true;
-                } else {
-                    input.checked = false;
                 }
             });
             updateIframe();
@@ -120,18 +111,6 @@
         });
 
         applyDarkMode(darkMode);
-
-        // Permitir apenas um checkbox marcado por vez
-        const checkboxes = document.querySelectorAll('.calendar-checkbox input[type="checkbox"]');
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', function () {
-                if (this.checked) {
-                    checkboxes.forEach(cb => {
-                        if (cb !== this) cb.checked = false;
-                    });
-                }
-            });
-        });
     </script>
 </body>
 </html>
