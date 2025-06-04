@@ -85,6 +85,15 @@
             background-color: #893B90; /* Roxo */
             border-color: #893B90;
         }
+        .calendar-checkbox[data-point="6"] input:checked ~ .checkmark {
+            background-color: #FF8C00; /* Laranja escuro para o ponto 6 */
+            border-color: #FF8C00;
+        }
+
+        /* Removido o padding-top do body que era para a tarja beta */
+        body {
+          padding-top: 0;
+        }
     </style>
 </head>
 <body>
@@ -124,6 +133,11 @@
                 <span class="checkmark"></span>
                 <strong>Ponto 5</strong> - Viaduto Washington Luiz
             </label>
+            <label class="calendar-checkbox" data-point="6">
+                <input type="radio" name="calendar" value="6" onclick="selectCalendar(6)">
+                <span class="checkmark"></span>
+                <strong>Ponto 6</strong> - Av Cupece
+            </label>
         </div>
 
         <div class="calendar-container">
@@ -137,7 +151,8 @@
             2: "e34e0be9c80ce654dc03c852e6e3c52af2f53d129295e297861523cbbeff93c2%40group.calendar.google.com",
             3: "d6c38e409070037546660123a107f4b95f65681a96c216cac7903d58465f5530%40group.calendar.google.com",
             4: "e22e471e522d36c6e1bca2edfcecfbc5ea23c9af8b5b4d10004bf2c7e4b2261f%40group.calendar.google.com",
-            5: "1aa2749c04ae9ac703fa3b2ebbee2db79105711fcda01f98b82da998bc7488ce%40group.calendar.google.com"
+            5: "1aa2749c04ae9ac703fa3b2ebbee2db79105711fcda01f98b82da998bc7488ce%40group.calendar.google.com",
+            6: "OWRlMmM4MTg3YWI3YTQ3ZGRiYzBmZjljYTJmNzY1ZTA0ZjljNzI0NmE5ZDlmMDU5NDk4NTQ2MDFhZTVmNjg2M0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
         };
 
         const calendarColorMap = {
@@ -145,7 +160,8 @@
             2: "#0D7813", // Verde
             3: "#E67C73", // Laranja
             4: "#B1365F", // Vermelho
-            5: "#893B90"  // Roxo
+            5: "#893B90", // Roxo
+            6: "#FF8C00"  // Laranja escuro para o ponto 6
         };
 
         const selectedCalendar = localStorage.getItem("selectedCalendar") || null;

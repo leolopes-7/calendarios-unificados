@@ -123,19 +123,19 @@ body {
 }
 
 /* Cores para os nomes dos pontos */
-.ponto1 {
+.ponto1 .calendar-title {
     color: #2952A3; /* Azul */
 }
-.ponto2 {
+.ponto2 .calendar-title {
     color: #0D7813; /* Verde */
 }
-.ponto3 {
+.ponto3 .calendar-title {
     color: #E67C73; /* Laranja */
 }
-.ponto4 {
+.ponto4 .calendar-title {
     color: #B1365F; /* Vermelho */
 }
-.ponto5 {
+.ponto5 .calendar-title {
     color: #893B90; /* Roxo */
 }
 
@@ -164,20 +164,20 @@ body {
 }
 
 /* Manter a cor dos pontos no dark mode */
-.dark-mode .ponto1 {
-    color: #2952A3; /* Azul */
+.dark-mode .ponto1 .calendar-title {
+    color: #2952A3;
 }
-.dark-mode .ponto2 {
-    color: #0D7813; /* Verde */
+.dark-mode .ponto2 .calendar-title {
+    color: #0D7813;
 }
-.dark-mode .ponto3 {
-    color: #E67C73; /* Laranja */
+.dark-mode .ponto3 .calendar-title {
+    color: #E67C73;
 }
-.dark-mode .ponto4 {
-    color: #B1365F; /* Vermelho */
+.dark-mode .ponto4 .calendar-title {
+    color: #B1365F;
 }
-.dark-mode .ponto5 {
-    color: #893B90; /* Roxo */
+.dark-mode .ponto5 .calendar-title {
+    color: #893B90;
 }
 
 /* Calendar iframe */
